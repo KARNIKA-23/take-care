@@ -1,0 +1,431 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Just a Little Hi 💗</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            min-height: 100vh;
+            font-family: "Trebuchet MS", Arial, sans-serif;
+            overflow-x: hidden;
+            overflow-y: auto;
+            background: linear-gradient(135deg, #ffd6e7, #e8d8ff, #d7f3ff);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+        }
+
+        /* Background glow */
+        body::before,
+        body::after {
+            content: "";
+            position: absolute;
+            width: 300px;
+            height: 300px;
+            border-radius: 50%;
+            filter: blur(70px);
+            opacity: 0.5;
+            z-index: 0;
+        }
+
+        body::before {
+            background: #ff9fc5;
+            top: -100px;
+            left: -80px;
+        }
+
+        body::after {
+            background: #b99cff;
+            bottom: -100px;
+            right: -80px;
+        }
+
+        /* Floating decorations */
+        .floating {
+            position: absolute;
+            animation: float 5s ease-in-out infinite;
+            opacity: 0.8;
+            z-index: 1;
+        }
+
+        .f1 { top: 10%; left: 10%; font-size: 30px; }
+        .f2 { top: 20%; right: 12%; font-size: 25px; animation-delay: 1s; }
+        .f3 { bottom: 15%; left: 15%; font-size: 28px; animation-delay: 2s; }
+        .f4 { bottom: 12%; right: 15%; font-size: 25px; animation-delay: 3s; }
+        .f5 { top: 50%; left: 5%; font-size: 20px; animation-delay: 1.5s; }
+        .f6 { top: 55%; right: 5%; font-size: 20px; animation-delay: 2.5s; }
+
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0) rotate(0deg);
+            }
+            50% {
+                transform: translateY(-20px) rotate(8deg);
+            }
+        }
+
+        /* Main card */
+        .card {
+               position: relative;
+               z-index: 5;
+               width: min(90%, 500px);
+               min-height: 570px;
+               margin: 40px 0;
+               padding: 45px 30px;
+
+               background: rgba(255, 255, 255, 0.65);
+               backdrop-filter: blur(18px);
+               -webkit-backdrop-filter: blur(18px);
+
+               border: 2px solid rgba(255, 255, 255, 0.8);
+               border-radius: 35px;
+               box-shadow: 0 25px 60px rgba(108, 76, 120, 0.18);
+
+               text-align: center;
+
+               display: flex;
+               flex-direction: column;
+               align-items: center;
+               justify-content: center;
+}
+
+        /* Cute bear */
+        .bear {
+            font-size: 90px;
+            animation: bounce 2.5s ease-in-out infinite;
+            margin-bottom: 10px;
+        }
+
+        @keyframes bounce {
+            0%, 100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-10px);
+            }
+        }
+
+        .hello {
+            font-size: 18px;
+            color: #9b6b91;
+            letter-spacing: 2px;
+            margin-bottom: 8px;
+        }
+
+        h1 {
+            font-size: clamp(40px, 10vw, 65px);
+            color: #633d61;
+            margin-bottom: 12px;
+            line-height: 1.1;
+        }
+
+        h1 span {
+            color: #ec76a9;
+        }
+
+        .subtitle {
+            color: #755b75;
+            font-size: 17px;
+            line-height: 1.6;
+            max-width: 380px;
+            margin-bottom: 28px;
+        }
+
+        /* Button */
+        .cute-btn {
+            border: none;
+            padding: 15px 30px;
+            border-radius: 50px;
+            background: linear-gradient(135deg, #f486b3, #c993e8);
+            color: white;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            box-shadow: 0 10px 25px rgba(215, 119, 176, 0.3);
+            transition: 0.3s ease;
+        }
+
+        .cute-btn:hover {
+            transform: translateY(-4px) scale(1.04);
+            box-shadow: 0 15px 30px rgba(215, 119, 176, 0.4);
+        }
+
+        .cute-btn:active {
+            transform: scale(0.96);
+        }
+
+        /* Hidden message */
+        .message {
+            display: none;
+            margin-top: 25px;
+            animation: appear 0.7s ease forwards;
+        }
+
+        .message.show {
+            display: block;
+        }
+
+        @keyframes appear {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .message-box {
+            background: rgba(255, 255, 255, 0.75);
+            padding: 22px;
+            border-radius: 25px;
+            border: 1px solid rgba(255, 255, 255, 0.9);
+        }
+
+        .message-box p {
+            color: #604b61;
+            font-size: 16px;
+            line-height: 1.7;
+        }
+
+        .signature {
+            margin-top: 15px;
+            color: #df679e !important;
+            font-weight: bold;
+        }
+
+        /* Hearts */
+        .heart {
+            position: fixed;
+            pointer-events: none;
+            font-size: 22px;
+            animation: heartFloat 3s linear forwards;
+            z-index: 20;
+        }
+
+        @keyframes heartFloat {
+            0% {
+                transform: translateY(0) scale(0.7);
+                opacity: 1;
+            }
+
+            100% {
+                transform: translateY(-400px) scale(1.4) rotate(20deg);
+                opacity: 0;
+            }
+        }
+
+        /* Footer */
+        .footer {
+            position: absolute;
+            bottom: 18px;
+            font-size: 12px;
+            color: #8b7189;
+            z-index: 5;
+        }
+
+        /* Mobile */
+        @media (max-width: 600px) {
+            .card {
+                min-height: 540px;
+                padding: 35px 22px;
+                border-radius: 30px;
+            }
+
+            .bear {
+                font-size: 75px;
+            }
+
+            .subtitle {
+                font-size: 15px;
+            }
+
+            .floating {
+                font-size: 20px !important;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Floating decorations -->
+    <div class="floating f1">🌸</div>
+    <div class="floating f2">✨</div>
+    <div class="floating f3">💗</div>
+    <div class="floating f4">🌷</div>
+    <div class="floating f5">⭐</div>
+    <div class="floating f6">💫</div>
+
+    <!-- Main card -->
+    <main class="card">
+
+        <div class="bear">🧸</div>
+
+        <p class="hello">HEY YOU...</p>
+
+        <h1>
+            Hiiii <span>Kuchupuchuuu!</span> 👋🏻
+        </h1>
+        <button class="cute-btn" id="openBtn" onclick="openMessage()">
+            Okay... Click Me 👀
+        </button>
+
+        <!-- Hidden message -->
+        <div class="message" id="message">
+
+            <div class="message-box">
+
+                <p>
+                    Just wanted to randomly say...
+                    <br><br>
+
+                    <strong>HI. 💗</strong>
+                    <br><br>
+
+                   You somehow know all the little things about me —
+                   what I love, what I don't, my favourite things,
+                   the foods that make me happy, and of course... chocolates. 🍫😂💗
+
+                   You always seem to know how to make me smile,
+                   even with the smallest things.
+
+                   And those flowers... 🌸
+                   They may have faded in that real,
+                   but they never really faded in my heart.
+
+                   Because they weren't just flowers to me.
+                   They were a little memory, a little moment,
+                   and something that will always remind me of you. 🥹🌷
+ 
+                   Maybe that's what makes certain things special —
+                   not how long they last,
+                   but how long they stay with us.
+
+                   So this little website is just my tiny way of saying...
+
+                   **Thank you for being one of my lovely person 
+                   who makes ordinary moments feel a little more special.** 💗
+
+                   And yes... before you get emotional —
+                   it's still just a very unnecessarily cute **HI**. 😂🫶🏻
+
+
+                </p>
+
+                <p class="signature">
+                    — From your girl bestie 🌷
+                </p>
+
+            </div>
+
+        </div>
+
+    </main>
+
+    <div class="footer">
+        made with a little too much effort 💗
+    </div>
+
+
+    <script>
+
+        function openMessage() {
+
+            const message = document.getElementById("message");
+            const button = document.getElementById("openBtn");
+
+            message.classList.add("show");
+
+            button.innerHTML = "There you go, idiot 😂💗";
+
+            createHearts();
+
+            // Create a few extra hearts after opening
+            setTimeout(createHearts, 500);
+            setTimeout(createHearts, 1000);
+        }
+
+
+        function createHearts() {
+
+            const hearts = ["💗", "💕", "💖", "💓", "✨", "🌸"];
+
+            for (let i = 0; i < 8; i++) {
+
+                const heart = document.createElement("div");
+
+                heart.className = "heart";
+
+                heart.innerHTML =
+                    hearts[Math.floor(Math.random() * hearts.length)];
+
+                heart.style.left =
+                    Math.random() * 100 + "vw";
+
+                heart.style.bottom = "0px";
+
+                heart.style.animationDuration =
+                    (2 + Math.random() * 2) + "s";
+
+                heart.style.fontSize =
+                    (15 + Math.random() * 20) + "px";
+
+                document.body.appendChild(heart);
+
+                setTimeout(() => {
+                    heart.remove();
+                }, 4000);
+            }
+        }
+
+
+        // Random tiny sparkles when the mouse moves
+        document.addEventListener("mousemove", function(e) {
+
+            if (Math.random() > 0.88) {
+
+                const sparkle = document.createElement("div");
+
+                sparkle.innerHTML = "✨";
+
+                sparkle.style.position = "fixed";
+                sparkle.style.left = e.clientX + "px";
+                sparkle.style.top = e.clientY + "px";
+                sparkle.style.pointerEvents = "none";
+                sparkle.style.fontSize = "12px";
+                sparkle.style.zIndex = "30";
+                sparkle.style.transition = "all 0.7s ease";
+
+                document.body.appendChild(sparkle);
+
+                setTimeout(() => {
+
+                    sparkle.style.transform =
+                        "translateY(-25px) scale(0)";
+
+                    sparkle.style.opacity = "0";
+
+                }, 50);
+
+                setTimeout(() => {
+                    sparkle.remove();
+                }, 800);
+            }
+        });
+
+    </script>
+
+</body>
+</html>
